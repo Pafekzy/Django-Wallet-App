@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import wallet_dashboard
 
 urlpatterns = [
-    path('', views.wallet_dashboard, name='wallet_dashboard'),
+    path("dashboard/", wallet_dashboard, name="wallet_dashboard"),
 ]

@@ -1,3 +1,18 @@
 <h2>Wallet Dashboard</h2>
 <p>Welcome, {{ request.user.username }}</p>
 <p>Your Balance: ${{ wallet.balance }}</p>
+
+<!-- Display success or error messages -->
+{% if messages %}
+    {% for message in messages %}
+        <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<!-- Deposit Form -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="transaction_type" value="Deposit">Deposit</button>
+    <button type="submit" name="transaction_type" value="Withdraw">Withdraw</button>
+</form>

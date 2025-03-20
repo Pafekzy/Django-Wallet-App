@@ -3,6 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Wallet, Transaction
 from .forms import TransactionForm
+from django.shortcuts import render
+
+def home(request):
+    return render(request, "wallet/home.html")
+
 
 @login_required
 def wallet_dashboard(request):

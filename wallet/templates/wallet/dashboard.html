@@ -1,18 +1,57 @@
-<h2>Wallet Dashboard</h2>
-<p>Welcome, {{ request.user.username }}</p>
-<p>Your Balance: ${{ wallet.balance }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 50%; margin: auto; text-align: center; }
+        form { margin-top: 20px; }
+        input, select, button { padding: 10px; margin: 5px; }
+        .messages { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Wallet Dashboard</h2>
+        <p>Welcome, <strong>{{ request.user.username }}</strong></p>
+        <p><strong>Current Balance:</strong> ${{ wallet.balance }}</p>
 
-<!-- Display success or error messages -->
-{% if messages %}
-    {% for message in messages %}
-        <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</p>
-    {% endfor %}
-{% endif %}
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-<!-- Deposit Form -->
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" name="transaction_type" value="Deposit">Deposit</button>
-    <button type="submit" name="transaction_type" value="Withdraw">Withdraw</button>
-</form>
+        <h3>Make a Transaction</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+
+        <h3>Transaction History</h3>
+        {% if wallet.transactions.all %}
+        <table border="1">
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+            {% for transaction in wallet.transactions.all %}
+            <tr>
+                <td>{{ transaction.transaction_type }}</td>
+                <td>${{ transaction.amount }}</td>
+                <td>{{ transaction.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No transactions yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

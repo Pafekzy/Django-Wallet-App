@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Wallet
+from .models import Wallet, Transaction
 from .forms import TransactionForm
 
 @login_required
@@ -28,4 +28,6 @@ def wallet_dashboard(request):
     else:
         form = TransactionForm()
 
-    return render(request, "wallet/dashboard.html", {"wallet": wallet, "form": form})
+    transactions = wallet.transactions.all().order_by("-timestamp")  # Fetch latest transactions
+
+    return render(request, "wallet/dashboard.html", {"wallet": wallet, "form": form, "transactions": transactions})

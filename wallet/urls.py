@@ -1,6 +1,7 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('', views.wallet_dashboard, name='wallet_dashboard'),
+    path('admin/', admin.site.urls),
+    path('wallet/', include('wallet.urls')),
 ]

@@ -34,14 +34,14 @@
         </form>
 
         <h3>Transaction History</h3>
-        {% if wallet.transactions.all %}
+        {% if transactions %}
         <table border="1">
             <tr>
                 <th>Type</th>
                 <th>Amount</th>
                 <th>Date</th>
             </tr>
-            {% for transaction in wallet.transactions.all %}
+            {% for transaction in transactions %}
             <tr>
                 <td>{{ transaction.transaction_type }}</td>
                 <td>${{ transaction.amount }}</td>

@@ -1,12 +1,13 @@
 {% extends "core/base.html" %}
 
-{% block title %}Signup - My Wallet Project{% endblock %}
+{% block title %}Sign Up - My Wallet{% endblock %}
 
 {% block content %}
-    <h2>Signup</h2>
+    <h2>Sign Up</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Sign Up</button>
     </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
 {% endblock %}

@@ -1,8 +1,7 @@
 from django.contrib import admin
-from django.urls import path, include  # <-- Include is needed
+from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("accounts/", include("django.contrib.auth.urls")),  # If using Django auth
-    path("", include("core.urls")),  # <-- Add this
+    path("", include("core.urls")),  # This links your core app's URLs
 ]

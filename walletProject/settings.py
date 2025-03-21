@@ -55,8 +55,7 @@ ROOT_URLCONF = 'walletProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / "templates"],  # Ensure this is correctly set
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

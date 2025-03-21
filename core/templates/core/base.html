@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Wallet Project{% endblock %}</title>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="#">About</a>
+    <a href="#">Transactions</a>
+    <a href="#">Profile</a>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</nav>
+
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>
